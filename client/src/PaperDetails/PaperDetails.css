@@ -1,0 +1,47 @@
+.paperDetails{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.paperDetails h2{
+    width: 100%;
+    margin: 2% 0% 3% 0%;
+}
+
+.paperDetails .abstract{
+    margin: 3% 0% 8% 0%;
+    text-align: justify;
+    width: 70%;
+}
+
+.paperDetails .rating{
+    display: flex;
+    justify-content: center;
+    width: 30%;
+}
+
+.paperDetails .star{
+    margin: 0% 2%;
+}
+
+.paperDetails .button{
+    margin: 4% 0%;
+    width: 100px;
+}
+
+.paperDetails .besideAbstract{
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+}
+
+.paperDetails .content{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+}
