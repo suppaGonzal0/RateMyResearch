@@ -4,3 +4,8 @@
     color: #333;
   }
   
+.App .content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}  
