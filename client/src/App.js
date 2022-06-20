@@ -2,6 +2,7 @@ import './App.css';
 import Navbar from './Navbar/Navbar';
 import Home from './Home/Home';
 import PaperDetails from './PaperDetails/PaperDetails';
+import Request from './Request/Request';
 import {BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
               </Route>
               <Route path="/paper/:id">
                 <PaperDetails/>
+              </Route>
+              <Route exact path="/request">
+                <Request/>
               </Route>
           </Switch>
         </div>

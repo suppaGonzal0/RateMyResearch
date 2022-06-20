@@ -1,0 +1,91 @@
+.req{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1%;
+}
+
+.reqCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.reqForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4%;
+    width: 100%;
+}
+
+.reqField{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 1% 0%;
+    height: 100%;
+}
+
+.reqForm button{
+    background-color: #3f37c9; /* Green */
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 2%;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.reqForm button:hover{
+    font-weight: 600;
+    background-color: #8a85e7;
+    color: black;
+}
+
+.reqForm input{
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 3em;
+    margin-top: 1.5%;
+    padding: 0% 3%;
+}
+
+.reqForm input[type=date]{
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 3em;
+    margin-top: 1.5%;
+    margin-right: 3%;
+    padding: 0% 6%;
+}
+
+.reqForm select{
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 3.3em;
+    margin-top: 1.5%;
+    margin-left: 3%;
+    padding: 0% 6%;
+}
+
+.reqForm textarea{
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 1.5%;
+    height: 15em;
+    resize: none;
+    padding: 3% 3%;
+}
+
+.dateNcat{
+    width: 50%;
+    display: flex;
+    justify-items: center;
+}
