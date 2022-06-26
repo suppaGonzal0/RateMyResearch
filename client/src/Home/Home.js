@@ -8,12 +8,14 @@ const Home = () => {
 
     //Fetch from database
 
-    const [papers, setPapers] = useState([
+    const papers = [
         {id:"1", title: "Rumor Detection on Social Media: Datasets, Methods and Opportunities", category: "ML", rating: "4.5/5", date:"15th June, 2020"},
-        {id:"2", title: "Remote sensing image denoising ", category: "IP", rating: "3/5", date:"10th August, 2021"},
-        {id:"3", title: "Remote sensing image denoising ", category: "IP", rating: "3/5", date:"10th August, 2021"},
-        {id:"4", title: "Remote sensing image denoising ", category: "IP", rating: "3/5", date:"10th August, 2021"}
-    ])
+        {id:"2", title: "Remote sensing image denoising", category: "IP", rating: "3/5", date:"10th August, 2021"},
+        {id:"3", title: "Public Safety Networks: Enabling Mobility", category: "DL", rating: "3.5/5", date:"10th August, 2021"},
+        {id:"4", title: "Switch Fabric Technology", category: "SR", rating: "2/5", date:"10th August, 2021"}
+    ]
+
+    const [searchedPaper, setSearchedPaper] = useState('');
 
   return (
     <div className='home'>
@@ -21,13 +23,22 @@ const Home = () => {
         <h2>Explore scientific, technical, and medical researches</h2>
 
         <div className='search'>
-            <input type="text" placeholder='search a paper'/>
+            <input type="text" placeholder='search a paper'
+                onChange={(event) => {
+                    setSearchedPaper(event.target.value)
+                }}/>
             <button className='searchbtn'><FaSearch style={{ fill: '#edecff' }} fontSize="1em" /></button>
             <button className='filterbtn'><FaFilter style={{ fill: '#edecff' }} fontSize="0.9em" /></button>
         </div>
 
         <div className='papers'>
-            {papers.map((paper) => (
+            {papers.filter((paper) => {
+                if(searchedPaper === "") {
+                    return ""
+                } else if (paper.title.toLowerCase().includes(searchedPaper.toLowerCase())){
+                    return paper
+                }
+            }).map((paper) => (
                 <div className='paper' key={paper.id}>
                     <h3>{paper.title}</h3>
                     <div className='paperInfo'>
