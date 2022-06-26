@@ -34,7 +34,7 @@ const Home = () => {
         <div className='papers'>
             {papers.filter((paper) => {
                 if(searchedPaper === "") {
-                    return ""
+                    return paper
                 } else if (paper.title.toLowerCase().includes(searchedPaper.toLowerCase())){
                     return paper
                 }
