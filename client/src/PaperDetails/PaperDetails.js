@@ -25,7 +25,7 @@ const PaperDetails = (paper) => {
     <div className='paperDetails'>
 
       {papers.filter(paper => paper.id === id).map(filteredPaper => (
-        <div>
+        <div key={filteredPaper.id}>
           <h2>{filteredPaper.title}</h2>
           <h4>Publish Date: {filteredPaper.date}</h4>
           <h4>Category: {filteredPaper.category}</h4>
