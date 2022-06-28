@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Home.css'
-import { FaSearch, FaFilter } from 'react-icons/fa';
+import { FaSearch, FaFilter, FaSortAmountDown } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { Link } from 'react-router-dom'
 
@@ -16,6 +16,31 @@ const Home = () => {
     ]
 
     const [searchedPaper, setSearchedPaper] = useState('');
+    const [action, setAction] = useState('title');
+
+    let data = papers.filter((paper) => {
+        if(action === 'title'){
+            if(searchedPaper === "") {
+                return paper
+            } else if (paper.title.toLowerCase().includes(searchedPaper.toLowerCase())){
+                return paper
+            }
+        } else if (action === 'filter'){
+            return paper.category === "ML"
+        }
+        return papers
+    })
+
+    if(action === 'sort'){
+        data = papers.filter((paper) => {
+            return paper.category === "IP"
+        })
+    }
+
+    if (action === "all"){
+        data = papers
+    }
+
 
   return (
     <div className='home'>
@@ -27,18 +52,13 @@ const Home = () => {
                 onChange={(event) => {
                     setSearchedPaper(event.target.value)
                 }}/>
-            <button className='searchbtn'><FaSearch style={{ fill: '#edecff' }} fontSize="1em" /></button>
-            <button className='filterbtn'><FaFilter style={{ fill: '#edecff' }} fontSize="0.9em" /></button>
+            <button className='searchbtn'><FaSearch style={{ fill: '#edecff' }} fontSize="1em" onClick={() => setAction('all')}/></button>
+            <button className='filterbtn'><FaFilter style={{ fill: '#edecff' }} fontSize="0.9em" onClick={() => setAction('filter')}/></button>
+            <button className='sortbtn'><FaSortAmountDown style={{ fill: '#edecff' }} fontSize="0.9em" onClick={() => setAction('sort')}/></button>
         </div>
 
         <div className='papers'>
-            {papers.filter((paper) => {
-                if(searchedPaper === "") {
-                    return paper
-                } else if (paper.title.toLowerCase().includes(searchedPaper.toLowerCase())){
-                    return paper
-                }
-            }).map((paper) => (
+            {data.map((paper) => (
                 <div className='paper' key={paper.id}>
                     <h3>{paper.title}</h3>
                     <div className='paperInfo'>
