@@ -7,10 +7,6 @@
     align-items: center;
 }
 
-.home .search{
-    margin: 3%;
-}
-
 .home .papers{
     width: 90%;
     display: flex;
@@ -96,6 +92,7 @@
 .home .search{
     width: 40%;
     display: flex;
+    margin: 3%;
 }
 
 .home .filterbtn{

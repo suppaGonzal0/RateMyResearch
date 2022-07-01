@@ -23,7 +23,8 @@ nav a {
 
 nav a:hover {
     color: #3f37c9;
-    font-weight: 600;
+    text-decoration: 2px underline;
+    font-weight: 700;
 }
 
 nav .login {
