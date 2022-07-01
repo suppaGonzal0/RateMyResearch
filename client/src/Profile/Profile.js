@@ -1,42 +1,23 @@
 import React from 'react'
 import './Profile.css'
 import { useState } from 'react'
+import Edit from './editSection/Edit'
+import Mypapers from './mypapersSection/Mypapers'
+import Saved from './savedSection/Saved'
 
 const Profile = () => {
 
   const [section, setSection] = useState('edit')
-  const [aboutme, setAboutme] = useState("No information")
 
-  const edit = () => {
-    return (
-      <div>
-        edit
-      </div>
-    )
-  }
+  //fetch aboutme from db in useEffect
+  const aboutme = "No information"
 
-  const mypapers = () => {
-    return (
-      <div>
-        mypapers
-      </div>
-    )
-  }
-
-  const saved = () => {
-    return (
-      <div>
-        saved
-      </div>
-    )
-  }
-
-  let sectionContent = <div>{edit()}</div>
+  let sectionContent = <Edit/>
 
   if(section === "mypapers"){
-    sectionContent = <div>{mypapers()}</div>
+    sectionContent = <Mypapers/>
   } else if(section === "saved"){
-    sectionContent = <div>{saved()}</div>
+    sectionContent = <Saved/>
   }
   
   return (
@@ -51,6 +32,8 @@ const Profile = () => {
         <p onClick={() => setSection('mypapers')}>My Papers</p>
         <p onClick={() => setSection('saved')}>Saved Papers</p>
       </div>
+
+      <hr />
 
       <div className="section">
         {sectionContent}
