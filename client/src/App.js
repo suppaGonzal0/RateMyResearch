@@ -4,6 +4,7 @@ import Home from './Home/Home';
 import PaperDetails from './PaperDetails/PaperDetails';
 import Request from './Request/Request';
 import Profile from './Profile/Profile';
+import AddPapers from './AddPapers/AddPapers';
 import {BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
               </Route>
               <Route exact path="/profile">
                 <Profile/>
+              </Route>
+              <Route exact path="/add">
+                <AddPapers/>
               </Route>
           </Switch>
         </div>

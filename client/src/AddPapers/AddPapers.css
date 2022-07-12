@@ -1,0 +1,33 @@
+.addPapers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+}
+
+.addPapers h2{
+    margin: 3%;
+}
+
+.addPapers .paper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 1%;
+    padding: 3% 2% 3% 2%;
+    background-color: #edecff;
+    border-radius: 8px;
+}
+
+.addPapers button{
+    margin: 0;
+}
+
+.addPapers .buttons{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    margin-top: 3%;
+    gap: 10%;
+}
