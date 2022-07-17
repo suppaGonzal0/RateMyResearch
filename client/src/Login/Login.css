@@ -1,0 +1,56 @@
+.login{
+    width: 100%;
+    display: flex;
+}
+
+.login .sectionRight{
+    background-color: #edecff;
+    width: 50%;
+    height: 725px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3% 0%;
+}
+
+.login .sectionLeft{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login .leftContent{
+    margin-bottom: 10%;
+    width: 80%;
+}
+
+.login h1{
+    color:#3f37c9;
+}
+
+.login .content{
+    width: 55%;
+}
+
+.login .reqField{
+    width: 100%;
+    margin: 3% 0%;
+}
+
+.login input{
+    height: 30px;
+    border-radius: 6px;
+}
+
+.login button{
+    margin-top: 7%;
+    padding: 2% 0%;
+}
+
+.login h4:hover{
+    color: #3f37c9;
+    cursor: pointer;
+}
