@@ -5,13 +5,18 @@ import PaperDetails from './PaperDetails/PaperDetails';
 import Request from './Request/Request';
 import Profile from './Profile/Profile';
 import AddPapers from './AddPapers/AddPapers';
+import Login from './Login/Login';
 import {BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 function App() {
+
+  //check user logged in or not
+  const userLoggedIn = false;
+
   return (
     <Router>
       <div className="App">
-        <Navbar/>
+        {userLoggedIn ? <Navbar/>: ""}
         <div className='content'>
           <Switch>
               <Route exact path="/">
@@ -28,6 +33,9 @@ function App() {
               </Route>
               <Route exact path="/add">
                 <AddPapers/>
+              </Route>
+              <Route exact path="/login">
+                <Login/>
               </Route>
           </Switch>
         </div>
