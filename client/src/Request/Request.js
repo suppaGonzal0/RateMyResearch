@@ -9,11 +9,14 @@ const Request = () => {
     const [abstract, setAbstract] = useState();
     const [link, setLink] = useState();
 
-    const userView = () => {
+    //userType
+    let user = "admin"
+
+    const view = (header, button) => {
         return (
             <div className='req'>
                 <div className='reqCard'>
-                <h2 >Request A Paper</h2>
+                <h2 >{header}</h2>
                 <form className='reqForm'>
                     <div className="reqField">
                         <label>Paper Title</label>
@@ -57,7 +60,7 @@ const Request = () => {
                             setLink(e.target.value);
                             }} />
                     </div>
-                    <button>Submit Request</button>
+                    <button>{button}</button>
                 </form>
                 </div>
             </div>
@@ -65,7 +68,11 @@ const Request = () => {
     }
 
     return (
-        <div className='req'>{userView()}</div>
+        <div className='req'>
+            {user==="admin" ? 
+            <>{view("Add A Paper", "Add")}</> : 
+            <>{view("Request A Paper", "Submit Request")}</>}
+        </div>               
   )
 }
 
