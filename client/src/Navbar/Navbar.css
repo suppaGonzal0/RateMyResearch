@@ -16,7 +16,7 @@ nav .links {
 }
 
 nav a {
-    margin: 15px;
+    margin: 14px;
     text-decoration: none;
     padding: 8px;
 }
@@ -24,25 +24,23 @@ nav a {
 nav a:hover {
     color: #3f37c9;
     text-decoration: 2px underline;
-    font-weight: 700;
 }
 
 nav .login {
     background-color: #3f37c9; /* Green */
     border: none;
     color: white;
+    width: 14%;
     padding: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin-left: 20px;
     cursor: pointer;
     border-radius: 8px;
 }
 
 nav .login:hover {
-    font-weight: 600;
     background-color: #8a85e7;
     color: black;
 }

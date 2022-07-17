@@ -15,7 +15,7 @@
 
 .home .paper{
     margin: 3%;
-    padding: 3% 2% 3% 2%;
+    padding: 2% 2% 1% 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,7 +24,6 @@
 }
 
 .home .paperInfo{
-    display: flex;
     width: 100%;
     display: flex;
     align-items: center;
@@ -36,7 +35,7 @@
     display: flex;
     flex-direction: column;
     width: 30%;
-    margin-top: 2%;
+    margin-top: 1%;
 }
 
 .home .right{
@@ -44,11 +43,11 @@
     flex-direction: column;
     align-items: center;
     width: 10%;
-    margin-top: 2%;
+    margin-top: 1%;
 }
 
 .home p{
-    margin: 2%;
+    margin: 1.5%;
 }
 
 .button{
@@ -56,12 +55,12 @@
     background-color: #3f37c9; /* Green */
     border: none;
     color: white;
-    padding: 10px;
+    padding: 5px 20px;
+    margin-bottom: 5%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin-left: 20px;
     cursor: pointer;
     border-radius: 8px;
 }
@@ -69,7 +68,6 @@
 .button:hover {
     background-color: #8a85e7;
     color: black;
-    font-weight: 600;
 }
 
 .home .save{
