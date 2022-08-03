@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Home.css'
-import { FaSearch, FaFilter, FaSortAmountDown } from 'react-icons/fa';
+import { FaSearch, FaFilter, FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { Link } from 'react-router-dom'
 
@@ -36,9 +36,12 @@ const Home = () => {
         setAction("filter")
     }
 
-    if(action === 'sort'){
+    if(action === 'sortDes'){
         data = papers.sort((a, b) => (a.rating < b.rating) ? 1 : -1)
+    } else if(action === 'sortAes'){
+        data = papers.sort((a, b) => (a.rating > b.rating) ? 1 : -1)
     }
+
 
 
   return (
@@ -53,7 +56,6 @@ const Home = () => {
                     setSearchedPaper(event.target.value)
                     setAction("title")
                 }}/>
-
             <button className='searchbtn'><FaSearch style={{ fill: '#edecff' }} fontSize="1em" onClick={() => window.location.reload()}/></button>
             
             <button className='filterbtn'><FaFilter style={{ fill: '#edecff' }} fontSize="0.9em"/>           
@@ -65,7 +67,10 @@ const Home = () => {
                 </div>
             </button>
 
-            <button className='sortbtn'><FaSortAmountDown style={{ fill: '#edecff' }} fontSize="0.9em" onClick={() => setAction('sort')}/></button>
+            <button className='sortbtn'><FaSortAmountDown style={{ fill: '#edecff' }} fontSize="0.9em" onClick={() => setAction('sortDes')}/></button>
+                
+            <button className='sortbtn'><FaSortAmountUp style={{ fill: '#edecff' }} fontSize="0.9em" onClick={() => setAction('sortAes')}/></button>
+
         </div>
 
         <div className='papers'>
