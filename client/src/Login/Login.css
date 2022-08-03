@@ -1,17 +1,17 @@
 .login{
     width: 100%;
+    height: 100vh;
     display: flex;
 }
 
 .login .sectionRight{
     background-color: #edecff;
     width: 50%;
-    height: 725px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 3% 0%;
 }
 
 .login .sectionLeft{

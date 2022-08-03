@@ -14,7 +14,7 @@
 .paperDetails .abstract{
     margin: 3% 0% 8% 0%;
     text-align: justify;
-    width: 70%;
+    width: 80%;
 }
 
 .paperDetails .rating{
@@ -24,24 +24,22 @@
 }
 
 .paperDetails .star{
-    margin: 0% 2%;
+    cursor: pointer;
+    transition: 0.2s all ease;
 }
+
 
 .paperDetails .button{
-    margin: 4% 0%;
+    margin: 1% 0%;
     width: 100px;
-}
-
-.paperDetails .besideAbstract{
-    margin-left: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 20%;
 }
 
 .paperDetails .content{
     display: flex;
     flex-direction: row;
     justify-items: center;
+}
+
+.paperDetails input[type="radio"]{
+    display: none;
 }

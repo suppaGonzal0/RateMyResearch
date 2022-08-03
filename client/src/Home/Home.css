@@ -91,11 +91,10 @@
     width: 40%;
     display: flex;
     margin: 3%;
+    gap: 2%;
 }
 
 .home .filterbtn{
-    font-size: large;
-    margin-right: 3%;
     font-size: large;
     background-color: #3f37c9;
     border: 2px solid black;
@@ -138,7 +137,6 @@
 
 .home .searchbtn{
     font-size: large;
-    margin-right: 3%;
     background-color: #3f37c9;
     border: 2px solid black;
     border-left: none;
