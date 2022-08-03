@@ -5,8 +5,10 @@ import { useState } from 'react'
 const Login = () => {
     const [content, setContent] = useState("login")
     const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [pass, setPass] = useState()
+    const [loginEmail, setLoginEmail] = useState()
+    const [loginPass, setLoginPass] = useState()
+    const [regEmail, setRegEmail] = useState()
+    const [regPass, setRegPass] = useState()
 
     let sectionContent 
 
@@ -17,14 +19,14 @@ const Login = () => {
                         <label>Email</label>
                         <input type="text" required
                             onChange={(e) => {
-                            setEmail(e.target.value);
+                            setLoginEmail(e.target.value);
                             }} />
                     </div>
                     <div className="reqField">
                         <label>Password</label>
                         <input type="text" required
                             onChange={(e) => {
-                            setPass(e.target.value);
+                            setLoginPass(e.target.value);
                             }} />
                     </div>
                     <button className='button'>Login</button>
@@ -45,14 +47,14 @@ const Login = () => {
                         <label>Email</label>
                         <input type="text" required
                             onChange={(e) => {
-                            setEmail(e.target.value);
+                            setRegEmail(e.target.value);
                             }} />
                     </div>
                     <div className="reqField">
                         <label>Password</label>
                         <input type="text" required
                             onChange={(e) => {
-                            setPass(e.target.value);
+                            setRegPass(e.target.value);
                             }} />
                     </div>
                     <button className='button'>create</button>
