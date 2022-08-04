@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react';
+import Modal from 'react-modal'
 import './PaperDetails.css'
 import { FiStar } from 'react-icons/fi';
 
@@ -9,6 +10,7 @@ const PaperDetails = (paper) => {
   const [rate, setRate] = useState(0)
   const [hover, setHover] = useState()
   const [star, setStar] = useState(true)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
     const {id} = useParams();
 
@@ -32,6 +34,24 @@ const PaperDetails = (paper) => {
       {id:"4", title: "Remote sensing image denoising ", abstract: abstract, category: "IP", rating: "3/5", date:"10th August, 2021"}
   ])
 
+  const openmodal = {
+    content: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      textAlign: 'center',
+      borderRadius: '1em',
+      width: '40%',
+      position: 'relative',
+    },
+    overlay: 
+    {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  }
+
   return (
     <div className='paperDetails'>
 
@@ -50,7 +70,7 @@ const PaperDetails = (paper) => {
       ))}
 
       
-        {star ? <>
+        {star ? <div className="ratingDiv">
           <div className='rating'>
         {[...Array(5)].map((star, i) => { 
           const ratingValue = i + 1
@@ -69,14 +89,27 @@ const PaperDetails = (paper) => {
       </div>
       <button className='button' onClick={() => rateSubmit()}>Submit</button>
       
-        </> : 
-        <>
+        </div> : 
+        <div className="ratingDiv">
            <h3>You rated this paper {rate} out of 5!</h3>
           <button className='button' onClick={reRate}>Re-rate</button>
-        </>}
+        </div>}
      
 
       <h2>Comments</h2>
+      <button className='button' onClick={() => setModalIsOpen(true)}>Write review</button>
+      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
+      style={openmodal}>
+        <div className="modal">
+          <h2>Leave A Review!</h2>
+          <textarea className='modalText'/>
+          <div className="modalButton">
+            <button className='button'>Submit</button>
+            <button className='button' onClick={() => setModalIsOpen(false)}>Cancel</button>
+          </div>
+        </div>
+      </Modal>
+
 
     </div>
 
