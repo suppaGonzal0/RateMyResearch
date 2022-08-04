@@ -21,12 +21,14 @@ const AddPapers = () => {
         <div className="container">
             {papers.map((paper) => (              
                 <div className='paper' key={paper.id}>
-                    <h3>{paper.title}</h3>
-                    <p><b>Publish date:</b> {paper.date}</p>
-                    <p><b>Category:</b> {paper.category}</p>
+                    <div className='paperinfo'>
+                        <h3>{paper.title}</h3>
+                        <p><b>Publish date:</b> {paper.date}</p>
+                        <p><b>Category:</b> {paper.category}</p>
+                    </div>
                     <div className="buttons">
-                        <button className='button' id="accept">Accept</button> 
-                        <button className='button' id="reject">Reject</button> 
+                        <button className='addPaperButton' id="accept">Accept</button> 
+                        <button className='addPaperButton' id="reject">Reject</button> 
                     </div>                     
                 </div>
             ))}
