@@ -6,21 +6,23 @@ import Request from './Request/Request';
 import Profile from './Profile/Profile';
 import AddPapers from './AddPapers/AddPapers';
 import Login from './Login/Login';
+import UserList from './UserList/UserList';
 import {BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 function App() {
 
   //check user logged in or not
-  const userLoggedIn = false;
+  const userLoggedIn = true;
+  const admin = false
 
   return (
     <Router>
       <div className="App">
-        {userLoggedIn ? <Navbar/>: ""}
+        {userLoggedIn ? <Navbar admin={admin}/>: ""}
         <div className='content'>
           <Switch>
               <Route exact path="/">
-                <Home/>
+                <Home admin={admin}/>
               </Route>
               <Route path="/paper/:id">
                 <PaperDetails/>
@@ -36,6 +38,9 @@ function App() {
               </Route>
               <Route exact path="/login">
                 <Login/>
+              </Route>
+              <Route exact path="/userlist">
+                <UserList/>
               </Route>
           </Switch>
         </div>

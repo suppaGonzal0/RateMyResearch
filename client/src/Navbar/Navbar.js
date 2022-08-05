@@ -2,15 +2,24 @@ import React from 'react'
 import './Navbar.css'
 import {Link} from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({admin}) => {
+
   return (
     <nav>
         <h1>RateMyResearch</h1>
         <div className='links'>
             <Link to="/">Home</Link>
-            <Link to="/request">Request</Link>
-            <Link to="/profile">My Profile</Link>
-            <Link to="/add">Add Papers</Link>
+            {admin ? 
+              <>
+                <Link to="/add">Add Papers</Link>
+                <Link to="/userlist">User List</Link>
+              </>
+            :
+              <>
+                <Link to="/request">Request</Link>
+                <Link to="/profile">My Profile</Link>
+              </>
+            }
             <button className='login'>Logout</button>
         </div>
     </nav>
