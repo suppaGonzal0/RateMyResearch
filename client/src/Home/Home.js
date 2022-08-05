@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 import './Home.css'
-import { FaSearch, FaFilter, FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
-import { FiBookmark } from 'react-icons/fi';
+import { FaAlignJustify, FaFilter, FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
 
 const Home = () => {
 
     //Fetch from database
-
     const papers = [
-        {id:"1", title: "Rumor Detection on Social Media: Datasets, Methods and Opportunities", category: "Machine Learning", rating: 4.5, date:"15th June, 2020"},
-        {id:"2", title: "Remote sensing image denoising", category: "Image Processing", rating: 3, date:"10th August, 2021"},
-        {id:"3", title: "Public Safety Networks: Enabling Mobility", category: "Deep Learning", rating: 3.5, date:"10th August, 2021"},
-        {id:"4", title: "Switch Fabric Technology", category: "Speech Recognition", rating: 2, date:"10th August, 2021"}
+        {id:"1", title: "Rumor Detection on Social Media: Datasets, Methods and Opportunities", authors: "poga,piga,puma", category: "Machine Learning", rating: 4.5, date:"15th June, 2020"},
+        {id:"2", title: "Remote sensing image denoising", category: "Image Processing", authors: "poga,piga,puma", rating: 3, date:"10th August, 2021"},
+        {id:"3", title: "Public Safety Networks: Enabling Mobility", authors: "poga,piga,puma", category: "Deep Learning", rating: 3.5, date:"10th August, 2021"},
+        {id:"4", title: "Switch Fabric Technology", authors: "poga,piga,puma", category: "Speech Recognition", rating: 2, date:"10th August, 2021"}
     ]
 
     const [searchedPaper, setSearchedPaper] = useState('');
@@ -31,15 +29,15 @@ const Home = () => {
         }
     })
 
-    const filterCategory = (value) => {
-        setFilter(value)
-        setAction("filter")
-    }
-
     if(action === 'sortDes'){
         data = papers.sort((a, b) => (a.rating < b.rating) ? 1 : -1)
     } else if(action === 'sortAes'){
         data = papers.sort((a, b) => (a.rating > b.rating) ? 1 : -1)
+    }
+
+    const filterCategory = (value) => {
+        setFilter(value)
+        setAction("filter")
     }
 
 
@@ -56,20 +54,24 @@ const Home = () => {
                     setSearchedPaper(event.target.value)
                     setAction("title")
                 }}/>
-            <button className='searchbtn'><FaSearch style={{ fill: '#edecff' }} fontSize="1em" onClick={() => window.location.reload()}/></button>
             
-            <button className='filterbtn'><FaFilter style={{ fill: '#edecff' }} fontSize="0.9em"/>           
-                <div className="dropdown">
-                    <p id="ml" onClick={() => filterCategory(document.getElementById("ml").innerHTML)}>Machine Learning</p>
-                    <p id="dl" onClick={() => filterCategory(document.getElementById("dl").innerHTML)}>Deep Learning</p>
-                    <p id="ip" onClick={() => filterCategory(document.getElementById("ip").innerHTML)}>Image Processing</p>
-                    <p id="sr" onClick={() => filterCategory(document.getElementById("sr").innerHTML)}>Speech Recognition</p>
-                </div>
-            </button>
+            <div className="icons">
 
-            <button className='sortbtn'><FaSortAmountDown style={{ fill: '#edecff' }} fontSize="0.9em" onClick={() => setAction('sortDes')}/></button>
-                
-            <button className='sortbtn'><FaSortAmountUp style={{ fill: '#edecff' }} fontSize="0.9em" onClick={() => setAction('sortAes')}/></button>
+                <button onClick={() => window.location.reload()}><FaAlignJustify style={{ fill: '#edecff' }} fontSize="1em"/></button>
+
+                <button className='filterbtn'><FaFilter style={{ fill: '#edecff' }} fontSize="0.9em"/>           
+                    <div className="dropdown">
+                        <p id="ml" onClick={() => filterCategory(document.getElementById("ml").innerHTML)}>Machine Learning</p>
+                        <p id="dl" onClick={() => filterCategory(document.getElementById("dl").innerHTML)}>Deep Learning</p>
+                        <p id="ip" onClick={() => filterCategory(document.getElementById("ip").innerHTML)}>Image Processing</p>
+                        <p id="sr" onClick={() => filterCategory(document.getElementById("sr").innerHTML)}>Speech Recognition</p>
+                    </div>
+                </button>
+
+                <button onClick={() => setAction('sortDes')}><FaSortAmountDown style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
+                    
+                <button onClick={() => setAction('sortAes')}><FaSortAmountUp style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
+            </div>
 
         </div>
 
@@ -80,6 +82,7 @@ const Home = () => {
                 <div className='paper' key={paper.id}>
 
                     <h3>{paper.title}</h3>
+                    <h4>Written by {paper.authors}</h4>
 
                     <div className='paperInfo'>
                         <div className='left'>
@@ -87,8 +90,7 @@ const Home = () => {
                             <p><b>Category:</b> {paper.category}</p>
                         </div>
                         <div className='right'>
-                            <p>{paper.rating}</p>
-                            <button className='save'><FiBookmark style={{ fill: 'none', stroke: "#3f37c9", strokeWidth: "2.5"}} fontSize="2em" /></button>
+                            <p>{paper.rating}/5</p>
                         </div>
                     </div>
 
