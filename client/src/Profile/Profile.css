@@ -9,7 +9,7 @@
 .mainDiv .sectionbar{
     display: flex;
     width: 60%;
-    margin: 5% 0% 1.5% 0%;
+    margin: 4% 0% 1% 0%;
     justify-content: space-between;
 }
 
@@ -44,6 +44,6 @@
 .mainDiv hr {
     width: 80%;
     border: 1px solid #f2f2f2;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
     border-radius: 5px;
   }

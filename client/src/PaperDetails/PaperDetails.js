@@ -76,6 +76,7 @@ const PaperDetails = (paper) => {
       ))}
 
       
+
         {star ? <div className="ratingDiv">
           <div className='rating'>
         {[...Array(5)].map((star, i) => { 
@@ -102,6 +103,7 @@ const PaperDetails = (paper) => {
         </div>}
      
 
+
       <h2>Comments</h2>
       <button className='writeReviewBtn' onClick={() => setModalIsOpen(true)}>Write review</button>
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
@@ -115,6 +117,8 @@ const PaperDetails = (paper) => {
           </div>
         </div>
       </Modal>
+
+
 
        <div className='commentSection'>
           {

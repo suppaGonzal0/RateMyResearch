@@ -3,14 +3,14 @@ import './Home.css'
 import { FaAlignJustify, FaFilter, FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
 
-const Home = () => {
+const Home = ({admin}) => {
 
     //Fetch from database
     const papers = [
-        {id:"1", title: "Rumor Detection on Social Media: Datasets, Methods and Opportunities", authors: "poga,piga,puma", category: "Machine Learning", rating: 4.5, date:"15th June, 2020"},
-        {id:"2", title: "Remote sensing image denoising", category: "Image Processing", authors: "poga,piga,puma", rating: 3, date:"10th August, 2021"},
-        {id:"3", title: "Public Safety Networks: Enabling Mobility", authors: "poga,piga,puma", category: "Deep Learning", rating: 3.5, date:"10th August, 2021"},
-        {id:"4", title: "Switch Fabric Technology", authors: "poga,piga,puma", category: "Speech Recognition", rating: 2, date:"10th August, 2021"}
+        {id:"1", title: "Rumor Detection on Social Media: Datasets, Methods and Opportunities", authors: "poga,piga,puma", category: "Machine Learning", rating: 4.5, date:"15th June, 2020", link:"https://www.bmc.com/blogs/mongodb-operators/"},
+        {id:"2", title: "Remote sensing image denoising", category: "Image Processing", authors: "poga,piga,puma", rating: 3, date:"10th August, 2021", link:"https://www.bmc.com/blogs/mongodb-operators/"},
+        {id:"3", title: "Public Safety Networks: Enabling Mobility", authors: "poga,piga,puma", category: "Deep Learning", rating: 3.5, date:"10th August, 2021", link:"https://www.bmc.com/blogs/mongodb-operators/"},
+        {id:"4", title: "Switch Fabric Technology", authors: "poga,piga,puma", category: "Speech Recognition", rating: 2, date:"10th August, 2021", link:"https://www.bmc.com/blogs/mongodb-operators/"}
     ]
 
     const [searchedPaper, setSearchedPaper] = useState('');
@@ -81,7 +81,7 @@ const Home = () => {
                 
                 <div className='paper' key={paper.id}>
 
-                    <h3>{paper.title}</h3>
+                    <h3><a href={paper.link} target="_blank" rel="noreferrer">{paper.title}</a></h3>
                     <h4>Written by {paper.authors}</h4>
 
                     <div className='paperInfo'>
@@ -93,11 +93,18 @@ const Home = () => {
                             <p>{paper.rating}/5</p>
                         </div>
                     </div>
-
+                    {admin ? 
+                        <div className="homeBtn">
+                            <Link to={`/paper/${paper.id}`}>
+                                <button className='button'>View</button>
+                            </Link>
+                            <button className='button'>Delete</button>
+                        </div> :
                         <Link to={`/paper/${paper.id}`}>
-                            <button className='button'>View</button>
-                        
+                        <button className='button'>View</button>
                         </Link>
+                    }
+                    
                 </div>
             ))}
             

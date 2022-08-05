@@ -1,7 +1,7 @@
 .home{
     margin: auto;
     width: 70%;
-    padding: 2%;
+    margin-top: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +14,7 @@
 }
 
 .home .paper{
-    margin: 3%;
+    margin: 1% 0%;
     padding: 2% 2% 1% 2%;
     display: flex;
     flex-direction: column;
@@ -42,8 +42,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: x-large;
+    font-weight: 600;
     width: 10%;
-    margin-top: 1%;
 }
 
 .home p{
@@ -51,23 +52,18 @@
 }
 
 .button{
-    width: 100%;
-    background-color: #3f37c9; /* Green */
-    border: none;
-    color: white;
-    padding: 5px 20px;
     margin-bottom: 5%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8px;
 }
 
 .button:hover {
     background-color: #8a85e7;
     color: black;
+}
+
+.homeBtn{
+    display: flex;
+    justify-content: space-between;
+    width: 17%;
 }
 
 .home .save{
@@ -90,18 +86,15 @@
 .home .search{
     width: 40%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 3%;
-    gap: 2%;
 }
 
-.home .filterbtn{
-    font-size: large;
-    background-color: #3f37c9;
-    border: 2px solid black;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
+.home .icons{
+    margin-top: 2%;
+    display: flex;
+    gap: 10%;
 }
 
 .home .dropdown {
@@ -126,30 +119,15 @@
     display: block;
   }
 
-.home .sortbtn{
-    font-size: large;
-    font-size: large;
-    background-color: #3f37c9;
-    border: 2px solid black;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.home .searchbtn{
-    font-size: large;
-    background-color: #3f37c9;
-    border: 2px solid black;
-    border-left: none;
-    border-radius: 0px 6px 6px 0px;
-    cursor: pointer;
-}
-
 .home input{
-  width: 80%;
+  width: 100%;
   padding: 6px;
   font-size: 17px;
   border: 2px solid black;
-  border-radius: 6px 0px 0px 6px;
-  border-right: none;
+  border-radius: 6px;
   cursor: pointer;
+}
+
+.home .paper a{
+    text-decoration: none;
 }
