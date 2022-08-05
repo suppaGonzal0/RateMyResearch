@@ -4,6 +4,7 @@ import './Request.css'
 const Request = () => {
 
     const [title, setTitle] = useState();
+    const [author, setAuthor] = useState();
     const [date, setDate] = useState();
     const [category, setCategory] = useState();
     const [abstract, setAbstract] = useState();
@@ -25,6 +26,13 @@ const Request = () => {
                             setTitle(e.target.value);
                             }} />
                     </div>
+                    <div className="reqField">
+                        <label>Authors</label>
+                        <input type="text" required
+                            onChange={(e) => {
+                            setAuthor(e.target.value);
+                            }} />
+                    </div>
                     <div className='dateNcat'>
                         <div className="reqField">
                             <label>Publish Date</label>
@@ -39,10 +47,10 @@ const Request = () => {
                                 setCategory(e.target.value);
                                 }}>
                                 <option value="">Choose a category</option>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
+                                <option value="volvo">Machine Learning</option>
+                                <option value="saab">Deep Learning</option>
+                                <option value="mercedes">Image Processing</option>
+                                <option value="audi">Speech Recognition</option>
                             </select>
                         </div>
                     </div>
