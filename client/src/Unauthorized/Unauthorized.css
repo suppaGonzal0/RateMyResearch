@@ -1,0 +1,8 @@
+.unauth{
+    height: 12.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+    justify-content: space-between;
+}
