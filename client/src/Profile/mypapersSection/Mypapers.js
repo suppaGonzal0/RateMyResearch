@@ -1,7 +1,10 @@
 import React from 'react'
 import './Mypapers.css' 
+import { useNavigate } from 'react-router-dom'
 
 const Mypapers = () => {
+
+  let navigate = useNavigate();
 
   const papers = [
     {id:"1", title: "Rumor Detection on Social Media: Datasets, Methods and Opportunities", category: "Machine Learning", rating: 4.5, date:"15th June, 2020"},
@@ -24,7 +27,7 @@ const Mypapers = () => {
                         <p><b>Category:</b> {paper.category}</p>
                     </div>
                     <div className="buttons">
-                        <button className='addPaperButton'>View</button> 
+                        <button className='addPaperButton' onClick={() => navigate(`/paper/${paper.id}`)}>View</button> 
                         <button className='addPaperButton'>Delete</button> 
                     </div>                     
                 </div>

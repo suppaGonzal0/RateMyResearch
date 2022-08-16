@@ -59,6 +59,9 @@ const PaperDetails = (paper) => {
   }
 
   return (
+
+    <main className='paperDetailsMain'>
+
     <div className='paperDetails'>
 
       {papers.filter(paper => paper.id === id).map(filteredPaper => (
@@ -134,7 +137,7 @@ const PaperDetails = (paper) => {
         </div> 
 
     </div>
-
+    </main>
   )
 }
 

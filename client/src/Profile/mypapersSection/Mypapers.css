@@ -1,7 +1,8 @@
-.myPaperCard{
+.myPapersCard{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 .myPapers{
@@ -20,7 +21,7 @@
     justify-content: center;
     text-align: center;
     width: 25%;
-    height: 9em;
+    height: 10em;
     margin: 1%;
     padding: 3%;
     background-color: #edecff;

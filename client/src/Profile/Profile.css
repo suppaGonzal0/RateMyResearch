@@ -1,37 +1,43 @@
-.mainDiv{
+.profileMain{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileContainer{
     width: 75%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3%;
 }
 
-.mainDiv .sectionbar{
+.profileContainer .sectionbar{
     display: flex;
     width: 60%;
     margin: 4% 0% 1% 0%;
     justify-content: space-between;
 }
 
-.mainDiv .sectionbar p{
+.profileContainer .sectionbar p{
     font-size: large;
     font-weight: 700;
 }
 
-.mainDiv .sectionbar p:hover{
+.profileContainer .sectionbar p:hover{
     color:#3f37c9;
     text-decoration: 2px underline ;
     cursor: pointer;
 }
 
-.mainDiv .section{
+.profileContainer .section{
     width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.mainDiv .aboutme{
+.profileContainer .aboutme{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,7 +47,7 @@
     width: 50%;
 }
 
-.mainDiv hr {
+.profileContainer hr {
     width: 80%;
     border: 1px solid #f2f2f2;
     margin-bottom: 2%;

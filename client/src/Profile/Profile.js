@@ -21,25 +21,28 @@ const Profile = () => {
   }
   
   return (
-    <div className='mainDiv'>
+    <main className='profileMain'>
       
-      <h2>User Name</h2>
+      <div className="profileContainer">
+        <h2>User Name</h2>
 
-      <p className='aboutme'>{aboutme}</p>
+        <p className='aboutme'>{aboutme}</p>
 
-      <div className='sectionbar'>    
-        <p onClick={() => setSection('edit')}>Edit Profile</p>
-        <p onClick={() => setSection('mypapers')}>My Papers</p>
-        <p onClick={() => setSection('saved')}>Saved Papers</p>
+        <div className='sectionbar'>    
+          <p onClick={() => setSection('edit')}>Edit Profile</p>
+          <p onClick={() => setSection('mypapers')}>My Papers</p>
+          <p onClick={() => setSection('saved')}>Saved Papers</p>
+        </div>
+
+        <hr />
+
+        <div className="section">
+          {sectionContent}
+        </div>
+        
       </div>
 
-      <hr />
-
-      <div className="section">
-        {sectionContent}
-      </div>
-
-    </div>
+    </main>
   )
 }
 

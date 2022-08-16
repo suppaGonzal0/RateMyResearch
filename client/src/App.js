@@ -7,45 +7,35 @@ import Profile from './Profile/Profile';
 import AddPapers from './AddPapers/AddPapers';
 import Login from './Login/Login';
 import UserList from './UserList/UserList';
-import {BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import Unauthorized from './Unauthorized/Unauthorized';
+import {BrowserRouter, Routes, Route } from "react-router-dom"
 
 function App() {
 
   //check user logged in or not
   const userLoggedIn = true;
-  const admin = false
+  const admin = true;
 
   return (
-    <Router>
-      <div className="App">
-        {userLoggedIn ? <Navbar admin={admin}/>: ""}
-        <div className='content'>
-          <Switch>
-              <Route exact path="/">
-                <Home admin={admin}/>
-              </Route>
-              <Route path="/paper/:id">
-                <PaperDetails/>
-              </Route>
-              <Route exact path="/request">
-                <Request/>
-              </Route>
-              <Route exact path="/profile">
-                <Profile/>
-              </Route>
-              <Route exact path="/add">
-                <AddPapers/>
-              </Route>
-              <Route exact path="/login">
-                <Login/>
-              </Route>
-              <Route exact path="/userlist">
-                <UserList/>
-              </Route>
-          </Switch>
-        </div>
+    <div className="App">
+        <BrowserRouter>
+          <Navbar admin={admin}/>
+            <Routes>
+              {userLoggedIn ? 
+                <>
+                  <Route path="/" element={<Home admin={admin}/>}/>
+                  <Route path="/paper/:id" element={<PaperDetails/>}/>
+                  <Route path="/request" element={<Request/>}/>
+                  <Route path="/profile" element={<Profile/>}/>
+                  <Route path="/add" element={<AddPapers/>}/>
+                  <Route path="/userlist" element={<UserList/>}/>
+                  <Route path="/unauthorized" element={<Unauthorized />}/>
+                  <Route path="/" element={<Home />}/>
+                </> : 
+                  <Login/>}
+              </Routes>
+            </BrowserRouter>  
      </div>
-    </Router>
   );
 }
 
