@@ -1,10 +1,11 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import './Request.css'
 
 const Request = () => {
 
     const [title, setTitle] = useState();
-    const [author, setAuthor] = useState();
+    const [authors, setAuthors] = useState();
     const [date, setDate] = useState();
     const [category, setCategory] = useState();
     const [abstract, setAbstract] = useState();
@@ -13,11 +14,55 @@ const Request = () => {
     //userType
     let user = "admin"
 
-    const view = (header, button) => {
-        return (
-            <div className='req'>
+    const handleReq = (e) => {
+        e.preventDefault()
+        const userInfo = JSON.parse(window.localStorage.getItem("userInfo"))
+        axios.post("http://localhost:3001/papers/addPaper", {
+            title: title,
+            authors: authors,
+            category: category,
+            date: date,
+            link: link,
+            abstract: abstract,
+            userID: userInfo._id,
+            }).then((response) => {
+                if(response.data.message) {
+                console.log(response.data.message)
+                } else {
+                console.log(response.data)
+                alert(response.data)
+                }
+            }); 
+    }
+
+    const handleAdd = (e) => {
+        e.preventDefault()
+        const userInfo = JSON.parse(window.localStorage.getItem("userInfo"))
+        axios.post("http://localhost:3001/requests/sendRequest", {
+            title: title,
+            authors: authors,
+            category: category,
+            date: date,
+            link: link,
+            abstract: abstract,
+            userID: userInfo._id,
+            email: userInfo.email,
+            username: userInfo.username
+            }).then((response) => {
+                if(response.data.message) {
+                console.log(response.data.message)
+                } else {
+                console.log(response.data)
+                alert(response.data)
+                }
+            });
+    }
+
+
+    return (
+        <div className='req'>
                 <div className='reqCard'>
-                <h2 >{header}</h2>
+                {user === "admin" ? <h2 >Add a paper</h2> : <h2 >Request a paper</h2>}
                 <form className='reqForm'>
                     <div className="reqField">
                         <label>Paper Title</label>
@@ -30,7 +75,7 @@ const Request = () => {
                         <label>Authors</label>
                         <input type="text" required
                             onChange={(e) => {
-                            setAuthor(e.target.value);
+                            setAuthors(e.target.value);
                             }} />
                     </div>
                     <div className='dateNcat'>
@@ -47,10 +92,10 @@ const Request = () => {
                                 setCategory(e.target.value);
                                 }}>
                                 <option value="">Choose a category</option>
-                                <option value="volvo">Machine Learning</option>
-                                <option value="saab">Deep Learning</option>
-                                <option value="mercedes">Image Processing</option>
-                                <option value="audi">Speech Recognition</option>
+                                <option value="Machine Learning">Machine Learning</option>
+                                <option value="Deep Learning">Deep Learning</option>
+                                <option value="Image Processing">Image Processing</option>
+                                <option value="Speech Recognition">Speech Recognition</option>
                             </select>
                         </div>
                     </div>
@@ -68,19 +113,11 @@ const Request = () => {
                             setLink(e.target.value);
                             }} />
                     </div>
-                    <button>{button}</button>
+                    {user === "admin" ? <button onClick={(e) => handleReq(e)}>Add paper</button> 
+                    : <button onClick={(e) => handleAdd(e)}>Send request</button>}
                 </form>
                 </div>
-            </div>
-        )
-    }
-
-    return (
-        <div className='req'>
-            {user==="admin" ? 
-            <>{view("Add A Paper", "Add")}</> : 
-            <>{view("Request A Paper", "Submit Request")}</>}
-        </div>               
+            </div>          
   )
 }
 
