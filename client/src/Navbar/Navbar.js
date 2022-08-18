@@ -11,7 +11,8 @@ const Navbar = ({admin}) => {
             <Link to="/">Home</Link>
             {admin ? 
               <>
-                <Link to="/add">Add Papers</Link>
+                <Link to="/paperReq">Paper Requests</Link>
+                <Link to="/request">Add Papers</Link>
                 <Link to="/userlist">User List</Link>
               </>
             :

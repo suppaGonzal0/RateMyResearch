@@ -4,7 +4,7 @@ import Home from './Home/Home';
 import PaperDetails from './PaperDetails/PaperDetails';
 import Request from './Request/Request';
 import Profile from './Profile/Profile';
-import PaperRequests from './PaperRequests/PaperRequests';
+import AddPapers from './AddPapers/AddPapers';
 import Login from './Login/Login';
 import UserList from './UserList/UserList';
 import Unauthorized from './Unauthorized/Unauthorized';
@@ -27,13 +27,12 @@ function App() {
                   <Route path="/paper/:id" element={<PaperDetails/>}/>
                   <Route path="/request" element={<Request/>}/>
                   <Route path="/profile" element={<Profile/>}/>
-                  <Route path="/paperReq" element={<PaperRequests/>}/>
+                  <Route path="/add" element={<AddPapers/>}/>
                   <Route path="/userlist" element={<UserList/>}/>
                   <Route path="/unauthorized" element={<Unauthorized />}/>
                   <Route path="/" element={<Home />}/>
                 </> : 
-                  <Route path="/login" element={<Login/>}/>
-                  }
+                  <Login/>}
               </Routes>
             </BrowserRouter>  
      </div>
