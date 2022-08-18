@@ -5,6 +5,7 @@ import usersRoute from "./routes/UsersRoute.js"
 import papersRoute from "./routes/PapersRoute.js"
 import requestsRoute from "./routes/RequestsRoute.js"
 import cookieParser from "cookie-parser"
+import cors from "cors";
 
 
 const app = express()
@@ -19,6 +20,12 @@ const connectDB = async () => {
 }
 
 //middlewares
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  }))
+
 app.use(cookieParser())
 app.use(express.json());
 
@@ -30,7 +37,7 @@ app.use("/requests", requestsRoute)
 app.use((err, req, res, next) => {
     const errStatus = err.status || 500
     const errMsg = err.message || "Something went wrong."
-    return res.status(errStatus).json({
+    return res.send({
         success: false,
         status: errStatus,
         message: errMsg

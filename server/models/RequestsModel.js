@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const PaperSchema = new mongoose.Schema({
+const RequestSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -25,17 +25,18 @@ const PaperSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    rating: {
-        type: Number,
-        default: 0,
-        min: 0,
-        max: 5,
-    },
     userID: {
         type: Object,
-        required: true
+        required: true,
     },
-    reviews: [{userID: Number, username: String, comment: String}],
+    email: {
+        type: String,
+        required: true,
+    },
+    username: {
+        type: String,
+        required: true,
+    },
 })
 
-export default mongoose.model("Paper", PaperSchema)
+export default mongoose.model("Request", RequestSchema)

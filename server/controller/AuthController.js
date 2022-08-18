@@ -14,7 +14,7 @@ export const register = async (req, res, next) => {
         })
 
         await newUser.save()
-        res.status(201).send("New user has been registered")
+        res.send("New user has been registered")
     } catch (error) {
         next(error)
     }
@@ -31,8 +31,9 @@ export const login = async (req, res, next) => {
         if(!passwordCheck) return next({status: 400, message: "Wrong password"})
 
         const token = jwt.sign({id: user._id, isAdmin:user.isAdmin, isBanned: user.isBanned}, "secretKey")
-
-        const {password, isAdmin, isBanned, ...otherInfo} = user._doc
+        
+        // const {password, isAdmin, isBanned, ...otherInfo} = user._doc
+        const {password, ...otherInfo} = user._doc
         res
             .cookie("access_token", token, {
                 httpOnly: true,
@@ -45,6 +46,11 @@ export const login = async (req, res, next) => {
 }
 
 export const logout = async (req, res, next) => {
-    res.cookie("access_token", "", {maxAge: 1})
-    next()
+    try{
+        res.cookie("access_token", "", {maxAge: 1})
+        res.status(200).send("You are logged out")
+        next()
+    } catch(error) {
+        next(error)
+    }
 }
