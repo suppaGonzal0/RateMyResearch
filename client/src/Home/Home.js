@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Home.css'
-import { FaAlignJustify, FaFilter, FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
+import { FaAlignJustify, FaFilter, FaSortAmountDown, FaSortAmountUp, FaCalendarPlus, FaCalendarMinus } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
+import axios from "axios"
 
 const Home = ({admin}) => {
 
-    //Fetch from database
-    const papers = [
-        {id:"1", title: "Rumor Detection on Social Media: Datasets, Methods and Opportunities", authors: "poga,piga,puma", category: "Machine Learning", rating: 4.5, date:"15th June, 2020", link:"https://www.bmc.com/blogs/mongodb-operators/"},
-        {id:"2", title: "Remote sensing image denoising", category: "Image Processing", authors: "poga,piga,puma", rating: 3, date:"10th August, 2021", link:"https://www.bmc.com/blogs/mongodb-operators/"},
-        {id:"3", title: "Public Safety Networks: Enabling Mobility", authors: "poga,piga,puma", category: "Deep Learning", rating: 3.5, date:"10th August, 2021", link:"https://www.bmc.com/blogs/mongodb-operators/"},
-        {id:"4", title: "Switch Fabric Technology", authors: "poga,piga,puma", category: "Speech Recognition", rating: 2, date:"10th August, 2021", link:"https://www.bmc.com/blogs/mongodb-operators/"}
-    ]
+    const [papers, setPapers] = useState([])
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/papers/getAllPapers").then((response) => {
+            setPapers(response.data);
+        });
+    }, [papers])
+
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:3001/papers/deletePaper/${id}`).then((response) => {
+            console.log(response.data)
+        });
+    }
+    
 
     const [searchedPaper, setSearchedPaper] = useState('');
     const [action, setAction] = useState('title');
@@ -29,10 +37,14 @@ const Home = ({admin}) => {
         }
     })
 
-    if(action === 'sortDes'){
+    if(action === 'sortRatingDes'){
         data = papers.sort((a, b) => (a.rating < b.rating) ? 1 : -1)
-    } else if(action === 'sortAes'){
+    } else if(action === 'sortRatingAsc'){
         data = papers.sort((a, b) => (a.rating > b.rating) ? 1 : -1)
+    } else if(action === 'sortDateDes'){
+        data = papers.sort((a, b) => (a.date < b.date) ? 1 : -1)
+    } else if(action === 'sortgDateAsc'){
+        data = papers.sort((a, b) => (a.date > b.date) ? 1 : -1)
     }
 
     const filterCategory = (value) => {
@@ -68,9 +80,14 @@ const Home = ({admin}) => {
                     </div>
                 </button>
 
-                <button onClick={() => setAction('sortDes')}><FaSortAmountDown style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
+                <button onClick={() => setAction('sortRatingDes')}><FaSortAmountDown style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
                     
-                <button onClick={() => setAction('sortAes')}><FaSortAmountUp style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
+                <button onClick={() => setAction('sortRatingAsc')}><FaSortAmountUp style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
+                
+                <button onClick={() => setAction('sortDateDes')}><FaCalendarPlus style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
+                    
+                <button onClick={() => setAction('sortgDateAsc')}><FaCalendarMinus style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
+            
             </div>
 
         </div>
@@ -79,14 +96,14 @@ const Home = ({admin}) => {
 
             {data.map((paper) => (
                 
-                <div className='paper' key={paper.id}>
+                <div className='paper' key={paper._id}>
 
                     <h3><a href={paper.link} target="_blank" rel="noreferrer">{paper.title}</a></h3>
                     <h4>Written by {paper.authors}</h4>
 
                     <div className='paperInfo'>
                         <div className='left'>
-                            <p><b>Publish date:</b> {paper.date}</p>
+                            <p><b>Publish date:</b> {paper.date.split("T")[0]}</p>
                             <p><b>Category:</b> {paper.category}</p>
                         </div>
                         <div className='right'>
@@ -95,12 +112,12 @@ const Home = ({admin}) => {
                     </div>
                     {admin ? 
                         <div className="homeBtn">
-                            <Link to={`/paper/${paper.id}`}>
+                            <Link to={`/paper/${paper._id}`}>
                                 <button className='button'>View</button>
                             </Link>
-                            <button className='button'>Delete</button>
+                            <button className='button' onClick={() => handleDelete(paper._id)}>Delete</button>
                         </div> :
-                        <Link to={`/paper/${paper.id}`}>
+                        <Link to={`/paper/${paper._id}`}>
                         <button className='button'>View</button>
                         </Link>
                     }
