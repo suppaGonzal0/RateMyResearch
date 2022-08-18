@@ -1,5 +1,5 @@
 import express from "express"
-import { addPaper, deletePaper, getAllPapers, getPaperById, updatePaper } from "../controller/PapersController.js"
+import { addPaper, deletePaper, getAllPapers, getPaperById, getPapersByUserID, updatePaper } from "../controller/PapersController.js"
 import { verifyAdmin, verifyUser } from "../verifyToken.js"
 
 const router = express.Router()
@@ -15,6 +15,8 @@ const router = express.Router()
 // router.get("/getAllPapers", verifyUser, getAllPapers)
 
 router.get("/getAllPapers", getAllPapers)
+
+router.get("/getPapersByUserID/:id", getPapersByUserID)
 
 router.post("/addPaper", addPaper)
 

@@ -42,6 +42,15 @@ export const getPaperById = async (req, res, next) => {
     }
 }
 
+export const getPapersByUserID = async (req, res, next) => {
+    try{
+        const papers = await papersModel.find({userID: req.params.id})
+        res.status(200).json(papers)
+    } catch (error){
+        next(error)
+    }
+}
+
 export const getAllPapers = async (req, res, next) => {
     try{
         const papers = await papersModel.find()

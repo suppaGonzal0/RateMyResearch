@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
     },    
     aboutMe: {
         type: String,
-        default: "",
+        default: "No Information",
     },
     myPapers: [{paperID: Number, title: String, authors: String}],
 

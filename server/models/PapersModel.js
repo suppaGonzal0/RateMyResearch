@@ -35,7 +35,7 @@ const PaperSchema = new mongoose.Schema({
         type: Object,
         required: true
     },
-    reviews: [{userID: Number, username: String, comment: String}],
+    reviews: [{userID: Object, date: Date, username: String, comment: String}],
 })
 
 export default mongoose.model("Paper", PaperSchema)
