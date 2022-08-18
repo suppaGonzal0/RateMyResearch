@@ -26,9 +26,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: "No Information",
     },
-    myPapers: [{paperID: Number, title: String, authors: String}],
+    savedPapers: [{paperID: Object, title: String, authors: String, category: String}],
 
-    savedPapers: [{paperID: Number, title: String, authors: String}],
+    ratings: [{paperID: Object,rate: Number}],
 })
 
 export default mongoose.model("User", UserSchema)

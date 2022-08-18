@@ -31,7 +31,8 @@ const Mypapers = ({userID}) => {
                 <div className='paper' key={paper._id}>
                     <div className='paperinfo'>
                         <h3>{paper.title}</h3>
-                        <p><b>Publish date:</b> {paper.date}</p>
+                        <h4>By {paper.authors}</h4>
+                        <p><b>Publish date:</b> {paper.date.split("T")[0]}</p>
                         <p><b>Category:</b> {paper.category}</p>
                     </div>
                     <div className="buttons">

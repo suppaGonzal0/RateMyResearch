@@ -1,44 +1,104 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'react-modal'
 import './PaperDetails.css'
 import { FiStar } from 'react-icons/fi';
+import axios from "axios"
+import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
 
-const PaperDetails = (paper) => {
+const PaperDetails = () => {
+
+  const {id} = useParams();
 
   const [rate, setRate] = useState(0)
   const [hover, setHover] = useState()
-  const [star, setStar] = useState(true)
+  const [star, setStar] = useState()
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [comment, setComment] = useState()
+  const [reviews, setReviews] = useState([])
+  const [saved, setSaved] = useState()
+  const [savedPapers, setSavedPapers] = useState()
+  const [paper, setPaper] = useState([])
+  const [isBanned, seIsBanned] = useState()
+  const [userRatings, setUserRatings] = useState()
+  const userInfo = JSON.parse(window.localStorage.getItem("userInfo"))
 
-    const {id} = useParams();
+    const writeReview = () => {
+      paper.reviews.push({userID: userInfo._id, date: new Date().toJSON().slice(0,10).replace(/-/g,'/') , username: userInfo.username, comment: comment})
+      axios.put(`http://localhost:3001/papers/updatePaper/${paper._id}`, {
+          reviews: paper.reviews
+        }).then((response) => {
+          console.log(response)
+      })
+    }
+
+    const modalHandler = () => {
+      writeReview()
+      setModalIsOpen(false)
+    }
+
+    useEffect(() => {
+      axios.get(`http://localhost:3001/papers/getPaper/${id}`).then((response) => {
+        setPaper(response.data);
+        setReviews(paper.reviews)
+        });
+        
+      axios.get(`http://localhost:3001/users/getUser/${userInfo._id}`).then((response) => {
+        seIsBanned(response.data.isBanned);
+
+        if(response.data.ratings.filter(paper => {return paper.paperID === id}).length === 0) {
+          setStar(true)
+          setUserRatings(response.data.ratings)
+        } else{
+          setStar(false)
+          response.data.ratings.map((paper, i) => {
+            if(paper.paperID === id){
+              setRate(response.data.ratings[i].rate)
+            }
+            return ""
+          })
+        }
+
+        if(response.data.savedPapers.filter(paper => {return paper.paperID === id}).length === 0) {
+          setSaved(false)
+          setSavedPapers(response.data.savedPapers)
+        } else{
+            setSaved(true)
+        }
+
+        });  
+      return () => {}
+    }, [id, userInfo._id, paper.reviews])
+    
 
     const rateSubmit = () => {
-      setStar(false)
+        userRatings.push({paperID: id, rate:rate})
+        axios.put(`http://localhost:3001/users/updateUser/${userInfo._id}`, {
+          ratings: userRatings
+        }).then((response) => {
+          console.log(response)
+      })
     }
 
-    const reRate = () => {
-      setStar(true)
-      setRate(0)
-    }
+    // const reRate = () => {
+    //   setStar(true)
+    //   setRate(0)
+    // }
 
-    //dummy abstract:
-    const abstract = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    const authors = "Poga, piga, puma"
+  const handleSave = () => {
+    savedPapers.push({paperID: id, title: paper.title, authors: paper.authors, category: paper.category})
+    axios.put(`http://localhost:3001/users/updateUser/${userInfo._id}`, {
+      savedPapers: savedPapers
+      }).then((response) => {
+        if(!response.data.message){
+          alert("This paper is saved")
+        } else {
+          console.log(response.data.message)
+        }
+      })
+  }
 
-    //get data by id:
-    const [papers, setPapers] = useState([
-      {id:"1", title: "Rumor Detection on Social Media: Datasets, Methods and Opportunities", authors: authors, abstract: abstract, category: "ML", rating: "4.5/5", date:"15th June, 2020"},
-      {id:"2", title: "Remote sensing image denoising ", abstract: abstract, category: "IP", authors: authors, rating: "3/5", date:"10th August, 2021"},
-      {id:"3", title: "Remote sensing image denoising ", abstract: abstract, category: "IP", authors: authors, rating: "3/5", date:"10th August, 2021"},
-      {id:"4", title: "Remote sensing image denoising ", abstract: abstract, category: "IP", authors: authors, rating: "3/5", date:"10th August, 2021"}
-  ])
-
-  const comments = [
-    {userid:"1", name:"poger123" ,body: "Great work", date:"15th June, 2020"},
-    {userid:"2", name:"akkas_mama" ,body: "Nobs", date:"13th July, 2021"}
-  ]
 
   const openmodal = {
     content: {
@@ -64,20 +124,19 @@ const PaperDetails = (paper) => {
 
     <div className='paperDetails'>
 
-      {papers.filter(paper => paper.id === id).map(filteredPaper => (
-        <div key={filteredPaper.id}>
-          <h2>{filteredPaper.title}</h2>
-          <h4>Publish Date: {filteredPaper.date}</h4>
-          <h4>Category: {filteredPaper.category}</h4>
+        <div className="paperDetailsContent">
+          <h2>{paper.title}</h2>
+          <h3>Written by {paper.authors}</h3>
+          <h4>Publish Date: {paper.date && paper.date.split("T")[0]}</h4>
+          <h4>Category: {paper.category}</h4>
           <div className="content">
             <div className='abstract'>
               <h4>Abstract</h4>
-              <p>{filteredPaper.abstract}</p>
+              <p>{paper.abstract}</p>
             </div>
           </div>
+          {saved ? <div className='saveBtn'><FaBookmark style={{ fill: '#3f37c9' }} fontSize="2em"/>  <b>This paper is saved</b></div> : <div className='saveBtn'><FaRegBookmark style={{ fill: '#3f37c9' }} fontSize="2em" cursor="pointer" onClick={(handleSave)}/>  <b>Save Paper</b></div>}
         </div>
-      ))}
-
       
 
         {star ? <div className="ratingDiv">
@@ -102,37 +161,47 @@ const PaperDetails = (paper) => {
         </div> : 
         <div className="ratingDiv">
            <h3>You rated this paper {rate} out of 5!</h3>
-          <button className='button' onClick={reRate}>Re-rate</button>
+          {/* <button className='button' onClick={reRate}>Re-rate</button> */}
         </div>}
      
 
 
       <h2>Comments</h2>
-      <button className='writeReviewBtn' onClick={() => setModalIsOpen(true)}>Write review</button>
-      <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
-      style={openmodal}>
-        <div className="modal">
-          <h2>Leave A Review!</h2>
-          <textarea className='modalText'/>
-          <div className="modalButton">
-            <button className='button'>Submit</button>
-            <button className='button' onClick={() => setModalIsOpen(false)}>Cancel</button>
-          </div>
-        </div>
-      </Modal>
+
+      {!isBanned ? 
+        <>
+          <button className='writeReviewBtn' onClick={() => setModalIsOpen(true)}>Write review</button>
+          <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}
+          style={openmodal} ariaHideApp={false}>
+            <div className="modal">
+              <h2>Leave A Review!</h2>
+              <textarea className='modalText' onChange={(e) => setComment(e.target.value)}/>
+              <div className="modalButton">
+                <button className='button' onClick={modalHandler}>Submit</button>
+                <button className='button' onClick={() => setModalIsOpen(false)}>Cancel</button>
+              </div>
+            </div>
+          </Modal>
+          </>
+        : <button className='writeReviewBtn'> You are banned</button>}
+
 
 
 
        <div className='commentSection'>
           {
-            comments.map((comment) => (
-              <div className="comments" key={comment.userid}>
-                <h3>{comment.name}</h3>
-                <h5>{comment.date}</h5>
-                <hr/>
-                <p>{comment.body}</p>
-              </div>
-            ))
+            reviews &&
+            <>
+            {
+              reviews.map((comment) => (
+                <div className="comments" key={comment.userid}>
+                  <h3>{comment.username}</h3>
+                  <h5>{comment.date && comment.date.split("T")[0]}</h5>
+                  <hr/>
+                  <p>{comment.comment}</p>
+                </div>
+              ))
+            }</>
           }
         </div> 
 
