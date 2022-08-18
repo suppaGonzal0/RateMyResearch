@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import './Home.css'
-import { FaAlignJustify, FaFilter, FaSortAmountDown, FaSortAmountUp, FaCalendarPlus, FaCalendarMinus } from 'react-icons/fa';
-import { Link } from 'react-router-dom'
+import { FaAlignJustify, FaFilter, FaSortAmountDown, FaSortAmountDownAlt, FaCalendarPlus, FaCalendarMinus } from 'react-icons/fa';
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 const Home = ({admin}) => {
+
+    let navigate = useNavigate();
 
     const [papers, setPapers] = useState([])
 
@@ -82,7 +84,7 @@ const Home = ({admin}) => {
 
                 <button onClick={() => setAction('sortRatingDes')}><FaSortAmountDown style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
                     
-                <button onClick={() => setAction('sortRatingAsc')}><FaSortAmountUp style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
+                <button onClick={() => setAction('sortRatingAsc')}><FaSortAmountDownAlt style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
                 
                 <button onClick={() => setAction('sortDateDes')}><FaCalendarPlus style={{ fill: '#edecff' }} fontSize="0.9em"/></button>
                     
@@ -112,14 +114,10 @@ const Home = ({admin}) => {
                     </div>
                     {admin ? 
                         <div className="homeBtn">
-                            <Link to={`/paper/${paper._id}`}>
-                                <button className='button'>View</button>
-                            </Link>
+                            <button className='button' onClick={() => navigate(`/paper/${paper._id}`)}>View</button>
                             <button className='button' onClick={() => handleDelete(paper._id)}>Delete</button>
                         </div> :
-                        <Link to={`/paper/${paper._id}`}>
-                        <button className='button'>View</button>
-                        </Link>
+                        <button className='button' onClick={() => navigate(`/paper/${paper._id}`)}>View</button>
                     }
                     
                 </div>

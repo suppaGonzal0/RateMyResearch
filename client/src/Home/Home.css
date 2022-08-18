@@ -15,7 +15,7 @@
 
 .home .paper{
     margin: 1% 0%;
-    padding: 2% 2% 1% 2%;
+    padding: 2% 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,10 +49,6 @@
 
 .home p{
     margin: 1.5%;
-}
-
-.button{
-    margin-bottom: 5%;
 }
 
 .button:hover {
