@@ -1,13 +1,28 @@
 import React from 'react'
 import './UserList.css'
+import { useState, useEffect } from 'react'
+import axios from "axios"
 
 const UserList = () => {
 
-  const users = [
-    {id: 1, name: "poger", email: "dsadsadas"},
-    {id: 2, name: "pondo", email: "wffgsdf"},
-    {id: 3, name: "pipola", email: "gvdvscvsd"}
-  ]
+    const [users, setUsers] = useState([])
+
+    const handleBan = (_id, isBanned) => {
+        axios.put(`http://localhost:3001/users/updateBanStatus/${_id}`, {
+            isBanned: !isBanned
+          }).then((response) => {
+            console.log(response)
+          })
+    }
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/users/getAllUsers").then((response) => {
+            setUsers(response.data);
+        });
+    
+      return () => {}
+    }, [users])
+
 
   return (
     <main className="userListMain">
@@ -31,18 +46,18 @@ const UserList = () => {
                 </div>
                 {
                     users.map((user) => (
-                        <div className="user" key={user.id}>
+                        <div className="user" key={user._id}>
                             <div className="userow">
-                                <p>{user.id}</p>
+                                <p>{user._id}</p>
                             </div>
                             <div className="userow">
-                                <p>{user.name}</p>
+                                <p>{user.username}</p>
                             </div>
                             <div className="userow">
                                 <p>{user.email}</p>
                             </div>
                             <div className="userow">
-                                <h4>Ban {user.name}</h4>
+                                <h4 onClick={() => handleBan(user._id, user.isBanned)}>{!user.isBanned ? "Ban" : "Unban"} {user.username}</h4>
                             </div>
                         </div>
                     ))
