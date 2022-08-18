@@ -1,14 +1,46 @@
 import React from 'react'
 import './Login.css'
 import { useState } from 'react'
+import axios from "axios"
 
 const Login = () => {
-    const [content, setContent] = useState("login")
-    const [name, setName] = useState()
-    const [loginEmail, setLoginEmail] = useState()
-    const [loginPass, setLoginPass] = useState()
-    const [regEmail, setRegEmail] = useState()
-    const [regPass, setRegPass] = useState()
+  const [content, setContent] = useState("login")
+  const [name, setName] = useState()
+  const [loginEmail, setLoginEmail] = useState()
+  const [loginPass, setLoginPass] = useState()
+  const [regEmail, setRegEmail] = useState()
+  const [regPass, setRegPass] = useState()
+
+  const login = (e) => {
+    e.preventDefault()
+    axios.post("http://localhost:3001/auth/login", {
+      email: loginEmail,
+      password: loginPass,
+      }).then((response) => {
+        if(response.data.message) {
+          console.log(response.data.message)
+        } else {
+          const {email, username, _id, isAdmin} = response.data
+          localStorage.setItem("userInfo", JSON.stringify({email, username, _id, isAdmin}));
+        }
+      });
+  }  
+
+  const register = (e) => {
+    e.preventDefault()
+    axios.post("http://localhost:3001/auth/register", {
+      username: name,
+      email: regEmail,
+      password: regPass,
+      }).then((response) => {
+        if(response.data.message) {
+          console.log(response.data.message)
+        } else {
+          console.log("registered")
+        }
+      });
+  }  
+    
 
     let sectionContent 
 
@@ -29,7 +61,7 @@ const Login = () => {
                             setLoginPass(e.target.value);
                             }} />
                     </div>
-                    <button className='button'>Login</button>
+                    <button className='button' onClick={(e) => login(e)}>Login</button>
                 <h4 onClick={() => setContent("register")}>
                     Create an account</h4>
             </div>
@@ -57,7 +89,7 @@ const Login = () => {
                             setRegPass(e.target.value);
                             }} />
                     </div>
-                    <button className='button'>create</button>
+                    <button className='button' onClick={(e) => register(e)}>create</button>
                 <h4 onClick={() => setContent("login")}>
                     Already have an account</h4>
             </div>
