@@ -3,7 +3,7 @@ import './Login.css'
 import { useState } from 'react'
 import axios from "axios"
 
-const Login = () => {
+const Login = ({setUserLoggedIn}) => {
   const [content, setContent] = useState("login")
   const [name, setName] = useState()
   const [loginEmail, setLoginEmail] = useState()
@@ -22,6 +22,8 @@ const Login = () => {
         } else {
           const {email, username, _id, isAdmin} = response.data
           localStorage.setItem("userInfo", JSON.stringify({email, username, _id, isAdmin}));
+          setUserLoggedIn(true)
+          window.location.pathname="/"
         }
       });
   }  
@@ -37,6 +39,7 @@ const Login = () => {
           console.log(response.data.message)
         } else {
           console.log("registered")
+          window.location.pathname="/login"
         }
       });
   }  

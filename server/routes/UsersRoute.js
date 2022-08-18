@@ -18,6 +18,8 @@ router.put("/updateUser/:id", updateUser)
 
 router.put("/updateBanStatus/:id", updateBanStatus)
 
+router.put("/notifications/:id", updateBanStatus)
+
 router.delete("/deleteUser/:id", deleteUser)
 
 router.get("/getUser/:id", getUserById)

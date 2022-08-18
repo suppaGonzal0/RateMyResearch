@@ -29,6 +29,13 @@ const UserSchema = new mongoose.Schema({
     savedPapers: [{paperID: Object, title: String, authors: String, category: String}],
 
     ratings: [{paperID: Object,rate: Number}],
+
+    notifications: [String],
+
+    picture: {
+        type: String,
+        default: "",
+    },
 })
 
 export default mongoose.model("User", UserSchema)

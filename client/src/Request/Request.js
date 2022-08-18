@@ -28,6 +28,7 @@ const Request = ({admin}) => {
                 } else {
                 console.log(response.data)
                 alert(response.data)
+                window.location.reload()
                 }
             }); 
     }
@@ -51,6 +52,7 @@ const Request = ({admin}) => {
                 } else {
                 console.log(response.data)
                 alert(response.data)
+                window.location.reload()
                 }
             });
     }

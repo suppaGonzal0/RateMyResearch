@@ -1,0 +1,17 @@
+.notifMain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.notif{
+    width: 70%;
+    margin: 1% 0%;
+    padding: 2% 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #edecff;
+}
