@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import './Request.css'
 
-const Request = () => {
+const Request = ({admin}) => {
 
     const [title, setTitle] = useState();
     const [authors, setAuthors] = useState();
@@ -10,9 +10,6 @@ const Request = () => {
     const [category, setCategory] = useState();
     const [abstract, setAbstract] = useState();
     const [link, setLink] = useState();
-
-    //userType
-    let user = "admin"
 
     const handleReq = (e) => {
         e.preventDefault()
@@ -62,7 +59,7 @@ const Request = () => {
     return (
         <div className='req'>
                 <div className='reqCard'>
-                {user === "admin" ? <h2 >Add a paper</h2> : <h2 >Request a paper</h2>}
+                {admin ? <h2 >Add a paper</h2> : <h2 >Request a paper</h2>}
                 <form className='reqForm'>
                     <div className="reqField">
                         <label>Paper Title</label>
@@ -113,7 +110,7 @@ const Request = () => {
                             setLink(e.target.value);
                             }} />
                     </div>
-                    {user === "admin" ? <button onClick={(e) => handleReq(e)}>Add paper</button> 
+                    {admin ? <button onClick={(e) => handleReq(e)}>Add paper</button> 
                     : <button onClick={(e) => handleAdd(e)}>Send request</button>}
                 </form>
                 </div>
